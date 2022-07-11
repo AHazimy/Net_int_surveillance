@@ -72,7 +72,7 @@ fi
 
 for val in ${org_int_array[@]};
 do
-if [ ${org_array[$val]}[0]==${int_ip_arr[$val]}[0] ] && [ ${org_spec_array[1]}[1]==${spec_array[1]}[1] ] && [ ${org_spec_array[2]}[2]==${spec_array[2]}[2] ] ;
+if [ "${org_array[$val]}[0]"=="${int_ip_arr[$val]}[0]" ] && [ "${org_spec_array[1]}[1]"=="${spec_array[1]}[1]" ] && [ "${org_spec_array[2]}[2]"=="${spec_array[2]}[2]" ] ;
 then echo "Compareeeeeeeeeed"
 echo "${org_array[$val]}[0]"
 echo "${int_ip_arr[$val]}[0]"
