@@ -46,6 +46,7 @@ readarray -d $'\n' -t org_int_array_1 <<< "$arr"
 for val in ${newarr[@]};
 do
 org_array[$val]=${int_ip_arr[$val]}
+
 echo "ADDED"
 echo $org_array[$val]
 done
@@ -55,31 +56,65 @@ fi
 
 if [ $counter -gt 0 ] ;
 then
+STATUS="" 
+STATUS_CHANGED=1
+STATUS_VAR=0
+
 
 for int in ${newarr[@]};
 do
 IFS=' , ' 
 read -ra spec_array <<< ${int_ip_arr[$int]}
 read -ra org_spec_array <<< ${org_array[$int]}
+#STATUS=""
+#STATUS_CHANGED=1
+#STATUS_VAR=0
 if [[ ${org_spec_array[0]} == ${spec_array[0]} ]] ;
 then echo "Clean IP configurations!"
-echo ${org_spec_array[0]}
+echo ${spec_array[0]}
 else echo "Bad IP Configurations!!!"
-zenity --info --text="Bad IP"
+#zenity --info --text=
+STATUS+="Bad IP: ${spec_array[0]}"
+STATUS_VAR=1
 echo ${org_spec_array[0]}
 fi
 if [[ ${org_spec_array[1]} == ${spec_array[1]} ]] ;
 then echo "Clean Subnet configurations!"
 echo ${org_spec_array[1]}
 else echo "Bad Subnet Configurations!!!"
-zenity --info --text="Bad Subnet"
+#zenity --info --text="Bad Subnet"
+STATUS+="Bad Subnet: ${spec_array[1]}"
+STATUS_VAR=1
 fi
 if [[ ${org_spec_array[2]} == ${spec_array[2]} ]] ;
 then echo "Clean BroadCast configurations!"
 echo ${org_spec_array[2]}
 else echo "Bad BroadCast Configurations!!!"
-zenity --info --text="Bad BroadCast"
+#zenity --info --text="Bad BroadCast"
+STATUS+="Bad BroadCast: ${spec_array[2]}"
+STATUS_VAR=1
 fi
+done
+fi
+echo "Status var is: $STATUS_VAR"
+echo $STATUS
+if [[ $STATUS_VAR -gt 0 ]] ;
+then zenity --question --text="Your Network configurations is modified\n$STATUS\n?"
+CONTINUE=$?
+echo "YOU ARE CATCHED"
+fi
+if [[ $CONTINUE == 1  ]] ;
+then sleep 20
+else 
+org_array=$int_ip_arr
+#org_int_array=$newarr
+readarray -d $'\n' -t org_int_array_1 <<< "$arr"
+for val in ${newarr[@]};
+do
+org_array[$val]=${int_ip_arr[$val]}
+
+echo "ADDED"
+echo $org_array[$val]
 done
 fi
 
@@ -119,5 +154,7 @@ test_2=${int_ip_arr[eth0]}
 #echo "Original is $test_1"
 #echo "Init is $test_2"
 int_ip_arr=()
+STATUS=""
+STATUS=0
 done
 
