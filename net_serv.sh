@@ -137,8 +137,8 @@ fi
 
 
 
-test_1=${org_array[eth0]}
-test_2=${int_ip_arr[eth0]}
+#test_1=${org_array[eth0]}
+#test_2=${int_ip_arr[eth0]}
 
 int_ip_arr=()
 STATUS=""
