@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 declare -A org_array
 declare -A org_int_array
 counter=0
@@ -98,18 +99,17 @@ echo "YOU ARE CATCHED"
 fi
 if [[ $CONTINUE == 1  ]] ;
 then 
-#for init in ${org_int_array_1[@]} ;
-#do
+
 for int in ${newarr[@]};
 do
 IFS=' , ' 
 read -ra org_spec_array <<< ${org_array[$int]}
 echo "|$int| |${org_spec_array[0]}| |${org_spec_array[1]}|"
-echo "kali" | sudo -S ifconfig "$int" "${org_spec_array[0]}" netmask "${org_spec_array[1]}"
+echo <your_password> | sudo -S ifconfig "$int" "${org_spec_array[0]}" netmask "${org_spec_array[1]}"
 done
 
 int_ip_arr=$org_array
-#org_int_array=$newarr
+
 readarray -d $'\n' -t org_int_array_1 <<< "$arr"
 for val in ${newarr[@]};
 do
@@ -129,16 +129,12 @@ else echo "The Number of interfaces is incorrect!"
 zenity --question --text="Your Network Interfaces number is changed\nDo you accept this changes?"
 CONTINUE_2=$?
 fi
-if [[ $CONTINUE_2 == 1  ]] ;
-then sleep 20
+if [[ $CONTINUE_2 == 1 ]] ;
+then notify-send "Interface not accepted!\nThe System will reboot!"
+echo <your_password> | sudo -S reboot
 else 
 SyncArrays
 fi
-
-
-
-#test_1=${org_array[eth0]}
-#test_2=${int_ip_arr[eth0]}
 
 int_ip_arr=()
 STATUS=""
