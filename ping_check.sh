@@ -2,7 +2,7 @@
 if [ "$1" == "" ]
 then
 echo "You forgot an IP address"
-echo "Syntax: ./ipsweep.sh 192.168.1"
+echo "Please enter like './ping_check.sh X.X.X'"
 
 else
 counter=0
