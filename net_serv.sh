@@ -4,11 +4,10 @@
 declare -A org_array
 declare -A org_int_array
 counter=0
-#arr="$(ls /sys/class/net/)"
 
 SyncArrays () {
 org_array=$int_ip_arr
-#org_int_array=$newarr
+
 readarray -d $'\n' -t org_int_array_1 <<< "$arr"
 for val in ${newarr[@]};
 do
