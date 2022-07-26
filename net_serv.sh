@@ -94,7 +94,7 @@ echo $STATUS
 if [[ $STATUS_VAR -gt 0 ]] ;
 then zenity --question --text="Your Network configurations is modified\n$STATUS\nDo you allow this changes? If no you have 5 minutes to reset it." --width=300
 CONTINUE=$?
-echo "YOU ARE CATCHED"
+
 fi
 if [[ $CONTINUE == 1  ]] ;
 then 
@@ -114,7 +114,6 @@ for val in ${newarr[@]};
 do
 int_ip_arr[$val]=${org_array[$val]}
 
-echo "ADDED"
 echo $org_array[$val]
 done
 
