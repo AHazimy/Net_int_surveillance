@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 declare -A org_array
 declare -A org_int_array
 counter=0
