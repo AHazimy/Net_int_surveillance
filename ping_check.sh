@@ -2,7 +2,7 @@
 if [ "$1" == "" ]
 then
 echo "You forgot an IP address"
-echo "Please enter like './ping_check.sh X.X.X'"
+#echo "Please enter like './ping_check.sh X.X.X'"
 
 else
 counter=0
